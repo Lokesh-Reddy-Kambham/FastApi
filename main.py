@@ -1,10 +1,18 @@
 from fastapi import Depends, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from models import Product
 from database import session , engine
 import database_model 
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 database_model.Base.metadata.create_all(bind=engine)
 
@@ -43,7 +51,7 @@ def get_all_products(db: Session = Depends(get_db)):
     db_products = db.query(database_model.Product).all()
     return db_products
 
-@app.get("/product/{id}")
+@app.get("/products/{product_id}")
 def get_product_by_id(id:int,db: Session = Depends(get_db)):
     db_product = db.query(database_model.Product).filter(database_model.Product.id == id).first()
     if db_product:
@@ -51,14 +59,14 @@ def get_product_by_id(id:int,db: Session = Depends(get_db)):
     return "Product is not Listed"
 
 
-@app.post("/add_product")
+@app.post("/products")
 def add_product(product: Product,db: Session = Depends(get_db)):
     db.add(database_model.Product(**product.model_dump()))
     db.commit()
     return product
 
 
-@app.put("/update_product")
+@app.put("/products/{id}")
 def update_product(id:int , product:Product,db: Session = Depends(get_db)):
     db_product = db.query(database_model.Product).filter(database_model.Product.id == id).first()
     if db_product:
@@ -71,7 +79,7 @@ def update_product(id:int , product:Product,db: Session = Depends(get_db)):
     else:
         return "product is not found"
 
-@app.delete("/delete_products")    
+@app.delete("/products/{id}")    
 def delete_product(id:int,db: Session = Depends(get_db)):
     db_product = db.query(database_model.Product).filter(database_model.Product.id == id).first()
     if db_product:
