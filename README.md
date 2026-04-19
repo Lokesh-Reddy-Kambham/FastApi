@@ -14,7 +14,7 @@ This repository contains a **full-stack Product Management app** built with:
 - **FastAPI backend**
 - **React frontend**
 
-I use this project to practice API development, frontend integration, and CRUD operations.
+This tutorial project is now completed, and I am using it for continued API and frontend practice.
 
 ---
 
@@ -22,7 +22,15 @@ I use this project to practice API development, frontend integration, and CRUD o
 - **Project Type:** Full Stack Practice App
 - **Backend:** FastAPI + Pydantic
 - **Frontend:** React + Axios
-- **Status:** Ongoing improvements
+- **Status:** Tutorial Completed (April 18, 2026)
+
+---
+
+## Project Progress
+- Completed full tutorial implementation
+- Built backend CRUD APIs with FastAPI
+- Connected React frontend with backend APIs
+- Continuing with refinements and extra improvements
 
 ---
 
@@ -44,10 +52,10 @@ I use this project to practice API development, frontend integration, and CRUD o
 ## API Endpoints
 - `GET /` - Welcome message
 - `GET /products` - Fetch all products
-- `GET /product/{id}` - Fetch product by ID
-- `POST /add_product` - Add a new product
-- `PUT /update_product?id={id}` - Update an existing product
-- `DELETE /delete_products?id={id}` - Delete a product
+- `GET /products/{id}` - Fetch product by ID
+- `POST /products` - Add a new product
+- `PUT /products/{id}` - Update an existing product
+- `DELETE /products/{id}` - Delete a product
 
 ---
 
